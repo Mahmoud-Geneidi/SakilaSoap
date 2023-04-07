@@ -54,7 +54,7 @@ public class FilmActor  implements java.io.Serializable {
         this.id = id;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
     public Film getFilm() {
         return this.film;
@@ -64,7 +64,7 @@ public class FilmActor  implements java.io.Serializable {
         this.film = film;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="actor_id", nullable=false, insertable=false, updatable=false)
     public Actor getActor() {
         return this.actor;
@@ -83,8 +83,6 @@ public class FilmActor  implements java.io.Serializable {
     public void setLastUpdate(Timestamp lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
-
-
 
 
 }

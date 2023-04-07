@@ -89,7 +89,7 @@ public class Film  implements java.io.Serializable {
         this.filmId = filmId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="language_id", nullable=false)
     public Language getLanguageByLanguageId() {
         return this.languageByLanguageId;
@@ -99,7 +99,7 @@ public class Film  implements java.io.Serializable {
         this.languageByLanguageId = languageByLanguageId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="original_language_id")
     public Language getLanguageByOriginalLanguageId() {
         return this.languageByOriginalLanguageId;
@@ -209,7 +209,7 @@ public class Film  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="film")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="film")
     public Set<Inventory> getInventories() {
         return this.inventories;
     }
@@ -218,7 +218,7 @@ public class Film  implements java.io.Serializable {
         this.inventories = inventories;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="film")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="film")
     public Set<FilmActor> getFilmActors() {
         return this.filmActors;
     }
@@ -227,7 +227,7 @@ public class Film  implements java.io.Serializable {
         this.filmActors = filmActors;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="film")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="film")
     public Set<FilmCategory> getFilmCategories() {
         return this.filmCategories;
     }
@@ -235,6 +235,7 @@ public class Film  implements java.io.Serializable {
     public void setFilmCategories(Set<FilmCategory> filmCategories) {
         this.filmCategories = filmCategories;
     }
+
 
 
 
