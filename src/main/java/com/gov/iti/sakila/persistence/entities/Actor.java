@@ -90,7 +90,7 @@ public class Actor  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="actor")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="actor")
     public Set<FilmActor> getFilmActors() {
         return this.filmActors;
     }
@@ -99,9 +99,16 @@ public class Actor  implements java.io.Serializable {
         this.filmActors = filmActors;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Actor{" +
+                "actorId=" + actorId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", filmActors=" + filmActors +
+                '}';
+    }
 }
 
 

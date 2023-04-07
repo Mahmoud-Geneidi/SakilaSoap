@@ -5,13 +5,12 @@
              version="3.0">
     <persistence-unit name="sakila" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>org.example.Account</class>
         <properties>
             <!-- Database connection settings -->
             <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sakila"/>
             <property name="jakarta.persistence.jdbc.user" value="sakila"/>
             <property name="jakarta.persistence.jdbc.password" value="sakila"/>
-            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
             <property name="hibernate.show_sql" value="true"/>
 <!--            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>-->
 
