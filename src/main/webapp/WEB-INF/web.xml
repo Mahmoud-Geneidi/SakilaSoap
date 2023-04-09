@@ -10,14 +10,29 @@
     </listener>
 
     <servlet>
-        <servlet-name>SakilaWebService</servlet-name>
+        <servlet-name>ActorWebService</servlet-name>
         <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>SakilaWebService</servlet-name>
-        <url-pattern>/sakila</url-pattern>
+        <servlet-name>ActorWebService</servlet-name>
+        <url-pattern>/actor</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FilmWebService</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FilmWebService</servlet-name>
+        <url-pattern>/film</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>actor</welcome-file>
+    </welcome-file-list>
 
 </web-app>

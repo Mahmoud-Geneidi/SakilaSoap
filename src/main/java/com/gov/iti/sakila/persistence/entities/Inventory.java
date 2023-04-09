@@ -62,7 +62,7 @@ public class Inventory  implements java.io.Serializable {
         this.inventoryId = inventoryId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="store_id", nullable=false)
     public Store getStore() {
         return this.store;
@@ -72,7 +72,7 @@ public class Inventory  implements java.io.Serializable {
         this.store = store;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="film_id", nullable=false)
     public Film getFilm() {
         return this.film;
@@ -92,7 +92,7 @@ public class Inventory  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="inventory")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="inventory")
     public Set<Rental> getRentals() {
         return this.rentals;
     }

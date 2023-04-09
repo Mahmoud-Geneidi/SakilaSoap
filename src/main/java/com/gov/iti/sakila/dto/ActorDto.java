@@ -1,8 +1,20 @@
 package com.gov.iti.sakila.dto;
 
+
 import java.sql.Timestamp;
 
-public class ActorDto {
+
+
+public class ActorDto  {
+    public ActorDto(Short actorId, String firstName, String lastName, Timestamp lastUpdate) {
+        this.actorId = actorId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.lastUpdate = lastUpdate;
+    }
+
+    public ActorDto() {
+    }
 
     private Short actorId;
     private String firstName;

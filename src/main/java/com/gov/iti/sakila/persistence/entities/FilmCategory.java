@@ -54,7 +54,7 @@ public class FilmCategory  implements java.io.Serializable {
         this.id = id;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
     public Film getFilm() {
         return this.film;
@@ -64,7 +64,7 @@ public class FilmCategory  implements java.io.Serializable {
         this.film = film;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="category_id", nullable=false, insertable=false, updatable=false)
     public Category getCategory() {
         return this.category;

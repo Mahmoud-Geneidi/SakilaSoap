@@ -14,6 +14,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -27,6 +29,7 @@ import java.util.Set;
 @Table(name="film"
     ,catalog="sakila"
 )
+@XmlRootElement
 public class Film  implements java.io.Serializable {
 
 

@@ -6,6 +6,7 @@ import com.gov.iti.sakila.persistence.Database;
 import com.gov.iti.sakila.persistence.entities.Actor;
 import org.mapstruct.factory.Mappers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -40,7 +41,15 @@ public class ActorDao extends GenericDao<Actor> {
     public List<ActorDto> getAllActors() {
         return getAll().stream()
                 .map(actorMapper::actorToActorDto)
-                .collect(Collectors.toList());
+                .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public List<ActorDto> getAllActorsByLimit(int start, int limit) {
+        List<Actor> actors = getAll();
+        int endIndex = Math.min(start + limit, actors.size());
+        return actors.subList(start, endIndex).stream()
+                .map(actorMapper::actorToActorDto)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }
 
