@@ -21,7 +21,7 @@ To use this project, you will need to have access to a **Sakila schema**.
 The web services will now be available at http://localhost:9090/Sakila. You can use a tool like Postman to interact with the services.
 
 ## Web Services
-/actors
+### /actors
 GET /actors
 Retrieve a list of all actors in the actor table.
 
@@ -37,7 +37,7 @@ Update an existing actor with the specified id.
 DELETE /actors/:id
 Delete an actor with the specified id.
 
-/films
+### /films
 GET /films
 Retrieve a list of all films in the film table.
 
