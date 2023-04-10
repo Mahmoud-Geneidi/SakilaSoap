@@ -73,6 +73,7 @@
                             <configuration>
                                 <sei>com.gov.iti.sakila.webService.ActorWebService</sei>
                                 <sei>com.gov.iti.sakila.webService.FilmWebService</sei>
+                                <sei>com.gov.iti.sakila.webService.LanguageWebService</sei>
                             </configuration>
                         </execution>
                     </executions>

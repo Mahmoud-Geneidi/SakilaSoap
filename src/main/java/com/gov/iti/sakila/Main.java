@@ -4,6 +4,7 @@ import com.gov.iti.sakila.dto.ActorDto;
 import com.gov.iti.sakila.dto.FilmDto;
 import com.gov.iti.sakila.persistence.dao.ActorDao;
 import com.gov.iti.sakila.persistence.dao.FilmDao;
+import com.gov.iti.sakila.persistence.dao.LanguageDao;
 import com.gov.iti.sakila.persistence.entities.Actor;
 import com.gov.iti.sakila.persistence.entities.Film;
 import com.gov.iti.sakila.persistence.entities.Language;
@@ -13,17 +14,14 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) {
-       ActorDao actorDao = new ActorDao();
-//        Actor actor = new Actor(
-//                "Tom",
-//                "Hanks",
-//                new Date(System.currentTimeMillis())
-//        );
+        Language language= new Language("Arabic",new Date(System.currentTimeMillis()));
 
-//    actorDao.deleteById(202);
+        LanguageDao languageDao = new LanguageDao();
+        System.out.println(languageDao.getAll());
 
 
     }

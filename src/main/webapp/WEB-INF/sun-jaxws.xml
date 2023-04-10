@@ -5,4 +5,8 @@
 
     <endpoint name="FilmWebService" implementation="com.gov.iti.sakila.webService.FilmWebService"
               url-pattern="/film" />
+
+
+    <endpoint name="LanguageWebService" implementation="com.gov.iti.sakila.webService.LanguageWebService"
+              url-pattern="/language" />
 </endpoints>

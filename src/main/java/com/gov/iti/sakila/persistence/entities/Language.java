@@ -2,16 +2,12 @@ package com.gov.iti.sakila.persistence.entities;// default package
 // Generated Apr 7, 2023, 4:05:26 PM by Hibernate Tools 6.1.7.Final
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
+
+import static jakarta.persistence.GenerationType.AUTO;
 import static jakarta.persistence.GenerationType.IDENTITY;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
+import org.hibernate.id.Assigned;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,7 +23,7 @@ import java.util.Set;
 public class Language  implements java.io.Serializable {
 
 
-     private Byte languageId;
+     private Short languageId;
      private String name;
      private Date lastUpdate;
      private Set<Film> filmsForLanguageId = new HashSet<Film>(0);
@@ -36,7 +32,12 @@ public class Language  implements java.io.Serializable {
     public Language() {
     }
 
-	
+    public Language(Short languageId, String name, Date lastUpdate) {
+        this.languageId = languageId;
+        this.name = name;
+        this.lastUpdate = lastUpdate;
+    }
+
     public Language(String name, Date lastUpdate) {
         this.name = name;
         this.lastUpdate = lastUpdate;
@@ -48,15 +49,15 @@ public class Language  implements java.io.Serializable {
        this.filmsForOriginalLanguageId = filmsForOriginalLanguageId;
     }
    
-     @Id @GeneratedValue(strategy=IDENTITY)
+     @Id @GeneratedValue(strategy= IDENTITY)
 
     
     @Column(name="language_id", unique=true, nullable=false)
-    public Byte getLanguageId() {
+    public Short getLanguageId() {
         return this.languageId;
     }
     
-    public void setLanguageId(Byte languageId) {
+    public void setLanguageId(Short languageId) {
         this.languageId = languageId;
     }
 
@@ -70,7 +71,7 @@ public class Language  implements java.io.Serializable {
         this.name = name;
     }
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     @Column(name="last_update", nullable=false, length=19)
     public Date getLastUpdate() {
         return this.lastUpdate;
@@ -80,7 +81,7 @@ public class Language  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="languageByLanguageId")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="languageByLanguageId")
     public Set<Film> getFilmsForLanguageId() {
         return this.filmsForLanguageId;
     }
@@ -89,7 +90,7 @@ public class Language  implements java.io.Serializable {
         this.filmsForLanguageId = filmsForLanguageId;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="languageByOriginalLanguageId")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="languageByOriginalLanguageId")
     public Set<Film> getFilmsForOriginalLanguageId() {
         return this.filmsForOriginalLanguageId;
     }
@@ -98,9 +99,16 @@ public class Language  implements java.io.Serializable {
         this.filmsForOriginalLanguageId = filmsForOriginalLanguageId;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return "Language{" +
+                "languageId=" + languageId +
+                ", name='" + name + '\'' +
+                ", lastUpdate=" + lastUpdate +
+                ", filmsForLanguageId=" + filmsForLanguageId +
+                ", filmsForOriginalLanguageId=" + filmsForOriginalLanguageId +
+                '}';
+    }
 }
 
 

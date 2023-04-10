@@ -2,18 +2,20 @@ package com.gov.iti.sakila.dto;
 
 import com.gov.iti.sakila.persistence.entities.Language;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.Year;
 import java.util.Date;
 
 
-public class FilmDto {
+public class FilmDto implements Serializable {
 
     private Short filmId;
     private Language languageByLanguageId;
     private Language languageByOriginalLanguageId;
     private String title;
     private String description;
-    private Date releaseYear;
+    private Year releaseYear;
     private byte rentalDuration;
     private BigDecimal rentalRate;
     private Short length;
@@ -23,7 +25,7 @@ public class FilmDto {
     private Date lastUpdate;
 
     public FilmDto(Short filmId, Language languageByLanguageId, Language languageByOriginalLanguageId, String title, String description,
-                   Date releaseYear, byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost,
+                   Year releaseYear, byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost,
                    String rating, String specialFeatures, Date lastUpdate) {
         this.filmId = filmId;
         this.languageByLanguageId = languageByLanguageId;
@@ -83,11 +85,11 @@ public class FilmDto {
         this.description = description;
     }
 
-    public Date getReleaseYear() {
+    public Year getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Date releaseYear) {
+    public void setReleaseYear(Year releaseYear) {
         this.releaseYear = releaseYear;
     }
 

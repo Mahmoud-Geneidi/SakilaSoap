@@ -1,9 +1,10 @@
 package com.gov.iti.sakila.dto;
 
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class ActorDto  {
+public class ActorDto implements Serializable {
     public ActorDto(Short actorId, String firstName, String lastName, Date lastUpdate) {
         this.actorId = actorId;
         this.firstName = firstName;

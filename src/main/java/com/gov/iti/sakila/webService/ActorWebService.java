@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 
 @WebService
-@SOAPBinding(style = SOAPBinding.Style.RPC,use = SOAPBinding.Use.LITERAL,parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
+@SOAPBinding(style = SOAPBinding.Style.RPC, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class ActorWebService {
 
     private ActorDao actorDao = new ActorDao();
@@ -29,7 +29,7 @@ public class ActorWebService {
 
     @WebMethod(operationName = "saveActor")
     public boolean saveActor(@WebParam(name = "actor") Actor actor) {
-        if(actor==null)
+        if (actor == null)
             return false;
         actorDao.save(actor);
         return true;
@@ -52,7 +52,7 @@ public class ActorWebService {
 
     @WebMethod(operationName = "getAllActorsByLimit")
     public ActorList getAllActorsByLimit(@WebParam(name = "start") int start, @WebParam(name = "limit") int limit) {
-        return new ActorList ((ArrayList<ActorDto>) actorDao.getAllActorsByLimit(start,limit));
+        return new ActorList((ArrayList<ActorDto>) actorDao.getAllActorsByLimit(start, limit));
     }
 
     @WebMethod(operationName = "deleteActorById")

@@ -3,8 +3,10 @@ package com.gov.iti.sakila.webService;
 import com.gov.iti.sakila.dto.ActorDto;
 import com.gov.iti.sakila.dto.FilmDto;
 import com.gov.iti.sakila.persistence.dao.FilmDao;
+import com.gov.iti.sakila.persistence.dao.LanguageDao;
 import com.gov.iti.sakila.persistence.entities.Actor;
 import com.gov.iti.sakila.persistence.entities.Film;
+import com.gov.iti.sakila.persistence.entities.Language;
 import com.gov.iti.sakila.utils.FilmList;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
@@ -30,6 +32,10 @@ public class FilmWebService {
     public boolean saveFilm(@WebParam(name = "film") Film film) {
         if(film==null)
             return false;
+        LanguageDao languageDao = new LanguageDao();
+        Optional<Language> language = languageDao.getById(1);
+        Language language1 = language.orElse(null);
+        film.setLanguageByLanguageId(language1);
         filmDao.save(film);
         return true;
     }
