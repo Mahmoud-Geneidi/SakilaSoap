@@ -2,18 +2,10 @@ package com.gov.iti.sakila.persistence.entities;// default package
 // Generated Apr 7, 2023, 4:05:26 PM by Hibernate Tools 6.1.7.Final
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
@@ -92,7 +84,7 @@ public class Inventory  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.EAGER, mappedBy="inventory")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="inventory", cascade = CascadeType.ALL)
     public Set<Rental> getRentals() {
         return this.rentals;
     }

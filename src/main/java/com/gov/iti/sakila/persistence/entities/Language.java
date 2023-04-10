@@ -12,7 +12,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import java.sql.Timestamp;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,7 +29,7 @@ public class Language  implements java.io.Serializable {
 
      private Byte languageId;
      private String name;
-     private Timestamp lastUpdate;
+     private Date lastUpdate;
      private Set<Film> filmsForLanguageId = new HashSet<Film>(0);
      private Set<Film> filmsForOriginalLanguageId = new HashSet<Film>(0);
 
@@ -36,11 +37,11 @@ public class Language  implements java.io.Serializable {
     }
 
 	
-    public Language(String name, Timestamp lastUpdate) {
+    public Language(String name, Date lastUpdate) {
         this.name = name;
         this.lastUpdate = lastUpdate;
     }
-    public Language(String name, Timestamp lastUpdate, Set<Film> filmsForLanguageId, Set<Film> filmsForOriginalLanguageId) {
+    public Language(String name, Date lastUpdate, Set<Film> filmsForLanguageId, Set<Film> filmsForOriginalLanguageId) {
        this.name = name;
        this.lastUpdate = lastUpdate;
        this.filmsForLanguageId = filmsForLanguageId;
@@ -71,11 +72,11 @@ public class Language  implements java.io.Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="last_update", nullable=false, length=19)
-    public Timestamp getLastUpdate() {
+    public Date getLastUpdate() {
         return this.lastUpdate;
     }
     
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

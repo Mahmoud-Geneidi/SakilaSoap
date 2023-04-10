@@ -47,8 +47,7 @@ public class Film  implements java.io.Serializable {
     }
 
 	
-    public Film(Language languageByLanguageId, String title, byte rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost, Date lastUpdate) {
-        this.languageByLanguageId = languageByLanguageId;
+    public Film(String title, byte rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost, Date lastUpdate) {
         this.title = title;
         this.rentalDuration = rentalDuration;
         this.rentalRate = rentalRate;
