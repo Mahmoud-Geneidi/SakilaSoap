@@ -1,7 +1,9 @@
 package com.gov.iti.sakila.webService;
 
+import com.gov.iti.sakila.dto.ActorDto;
 import com.gov.iti.sakila.dto.FilmDto;
 import com.gov.iti.sakila.persistence.dao.FilmDao;
+import com.gov.iti.sakila.persistence.entities.Actor;
 import com.gov.iti.sakila.persistence.entities.Film;
 import com.gov.iti.sakila.utils.FilmList;
 import jakarta.jws.WebMethod;
@@ -25,8 +27,11 @@ public class FilmWebService {
     }
 
     @WebMethod(operationName = "saveFilm")
-    public void saveFilm(@WebParam(name = "film") Film film) {
+    public boolean saveFilm(@WebParam(name = "film") Film film) {
+        if(film==null)
+            return false;
         filmDao.save(film);
+        return true;
     }
 
     @WebMethod(operationName = "updateFilm")
@@ -47,5 +52,16 @@ public class FilmWebService {
     @WebMethod(operationName = "getAllFilmsByLimit")
     public FilmList getAllFilmsByLimit(@WebParam(name = "start") int start, @WebParam(name = "limit") int limit) {
         return new FilmList((ArrayList<FilmDto>) filmDao.getAllFilmsByLimit(start,limit));
+    }
+
+    @WebMethod(operationName = "deleteFilmById")
+    public boolean deleteFilmById(@WebParam(name = "id") int id) {
+        Optional<FilmDto> optionalActorDto = filmDao.getFilmById(id);
+        if (optionalActorDto.isPresent()) {
+            Film actor = filmDao.getById(id).get();
+            filmDao.delete(actor);
+            return true;
+        }
+        return false;
     }
 }

@@ -28,8 +28,11 @@ public class ActorWebService {
     }
 
     @WebMethod(operationName = "saveActor")
-    public void saveActor(@WebParam(name = "actor") Actor actor) {
+    public boolean saveActor(@WebParam(name = "actor") Actor actor) {
+        if(actor==null)
+            return false;
         actorDao.save(actor);
+        return true;
     }
 
     @WebMethod(operationName = "updateActor")
@@ -50,5 +53,16 @@ public class ActorWebService {
     @WebMethod(operationName = "getAllActorsByLimit")
     public ActorList getAllActorsByLimit(@WebParam(name = "start") int start, @WebParam(name = "limit") int limit) {
         return new ActorList ((ArrayList<ActorDto>) actorDao.getAllActorsByLimit(start,limit));
+    }
+
+    @WebMethod(operationName = "deleteActorById")
+    public boolean deleteActorById(@WebParam(name = "id") int id) {
+        Optional<ActorDto> optionalActorDto = actorDao.getActorById(id);
+        if (optionalActorDto.isPresent()) {
+            Actor actor = actorDao.getById(id).get();
+            actorDao.delete(actor);
+            return true;
+        }
+        return false;
     }
 }

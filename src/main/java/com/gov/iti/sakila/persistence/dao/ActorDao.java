@@ -2,6 +2,7 @@ package com.gov.iti.sakila.persistence.dao;
 
 import com.gov.iti.sakila.dto.ActorDto;
 import com.gov.iti.sakila.mappers.ActorMapper;
+
 import com.gov.iti.sakila.persistence.Database;
 import com.gov.iti.sakila.persistence.entities.Actor;
 import org.mapstruct.factory.Mappers;
@@ -27,15 +28,15 @@ public class ActorDao extends GenericDao<Actor> {
     }
 
     public void save(Actor actor) {
-        save(actor);
+        super.save(actor);
     }
 
     public void update(Actor actor) {
-        update(actor);
+        super.update(actor);
     }
 
     public void delete(Actor actor) {
-        delete(actor);
+        super.delete(actor);
     }
 
     public List<ActorDto> getAllActors() {
@@ -51,6 +52,14 @@ public class ActorDao extends GenericDao<Actor> {
                 .map(actorMapper::actorToActorDto)
                 .collect(Collectors.toCollection(ArrayList::new));
     }
+
+    public void deleteById(int id) {
+        Optional<Actor> actorOptional = getById(id);
+        actorOptional.ifPresent(actor -> Database.doInTransactionWithoutResult(entityManager -> {
+            entityManager.remove(entityManager.contains(actor) ? actor : entityManager.merge(actor));
+        }));
+    }
+
 }
 
 

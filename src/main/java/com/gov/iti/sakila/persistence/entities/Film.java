@@ -2,23 +2,14 @@ package com.gov.iti.sakila.persistence.entities;// default package
 // Generated Apr 7, 2023, 4:05:26 PM by Hibernate Tools 6.1.7.Final
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
-import jakarta.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.Cascade;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,7 +20,6 @@ import java.util.Set;
 @Table(name="film"
     ,catalog="sakila"
 )
-@XmlRootElement
 public class Film  implements java.io.Serializable {
 
 
@@ -45,16 +35,19 @@ public class Film  implements java.io.Serializable {
      private BigDecimal replacementCost;
      private String rating;
      private String specialFeatures;
-     private Timestamp lastUpdate;
+     private Date lastUpdate;
+
      private Set<Inventory> inventories = new HashSet<Inventory>(0);
+
      private Set<FilmActor> filmActors = new HashSet<FilmActor>(0);
+
      private Set<FilmCategory> filmCategories = new HashSet<FilmCategory>(0);
 
     public Film() {
     }
 
 	
-    public Film(Language languageByLanguageId, String title, byte rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost, Timestamp lastUpdate) {
+    public Film(Language languageByLanguageId, String title, byte rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost, Date lastUpdate) {
         this.languageByLanguageId = languageByLanguageId;
         this.title = title;
         this.rentalDuration = rentalDuration;
@@ -62,7 +55,7 @@ public class Film  implements java.io.Serializable {
         this.replacementCost = replacementCost;
         this.lastUpdate = lastUpdate;
     }
-    public Film(Language languageByLanguageId, Language languageByOriginalLanguageId, String title, String description, Date releaseYear, byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost, String rating, String specialFeatures, Timestamp lastUpdate, Set<Inventory> inventories, Set<FilmActor> filmActors, Set<FilmCategory> filmCategories) {
+    public Film(Language languageByLanguageId, Language languageByOriginalLanguageId, String title, String description, Date releaseYear, byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost, String rating, String specialFeatures, Date lastUpdate, Set<Inventory> inventories, Set<FilmActor> filmActors, Set<FilmCategory> filmCategories) {
        this.languageByLanguageId = languageByLanguageId;
        this.languageByOriginalLanguageId = languageByOriginalLanguageId;
        this.title = title;
@@ -204,15 +197,15 @@ public class Film  implements java.io.Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="last_update", nullable=false, length=19)
-    public Timestamp getLastUpdate() {
+    public Date getLastUpdate() {
         return this.lastUpdate;
     }
     
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.EAGER, mappedBy="film")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="film", cascade = CascadeType.ALL)
     public Set<Inventory> getInventories() {
         return this.inventories;
     }
@@ -221,7 +214,7 @@ public class Film  implements java.io.Serializable {
         this.inventories = inventories;
     }
 
-@OneToMany(fetch=FetchType.EAGER, mappedBy="film")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="film" ,cascade = CascadeType.ALL)
     public Set<FilmActor> getFilmActors() {
         return this.filmActors;
     }
@@ -230,7 +223,7 @@ public class Film  implements java.io.Serializable {
         this.filmActors = filmActors;
     }
 
-@OneToMany(fetch=FetchType.EAGER, mappedBy="film")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="film", cascade = CascadeType.ALL)
     public Set<FilmCategory> getFilmCategories() {
         return this.filmCategories;
     }

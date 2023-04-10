@@ -1,25 +1,28 @@
 package com.gov.iti.sakila.dto;
 
 
-import java.sql.Timestamp;
-
-
+import java.util.Date;
 
 public class ActorDto  {
-    public ActorDto(Short actorId, String firstName, String lastName, Timestamp lastUpdate) {
+    public ActorDto(Short actorId, String firstName, String lastName, Date lastUpdate) {
         this.actorId = actorId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastUpdate = lastUpdate;
     }
 
+    public ActorDto(String firstName, String lastName, Date lastUpdate) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.lastUpdate = lastUpdate;
+    }
     public ActorDto() {
     }
 
     private Short actorId;
     private String firstName;
     private String lastName;
-    private Timestamp lastUpdate;
+    private Date lastUpdate;
 
     public Short getActorId() {
         return actorId;
@@ -45,11 +48,11 @@ public class ActorDto  {
         this.lastName = lastName;
     }
 
-    public Timestamp getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 

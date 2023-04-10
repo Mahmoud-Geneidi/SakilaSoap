@@ -3,12 +3,14 @@ package com.gov.iti.sakila.dto;
 import com.gov.iti.sakila.persistence.entities.Language;
 
 import java.math.BigDecimal;
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.Date;
+
 
 public class FilmDto {
 
     private Short filmId;
+    private Language languageByLanguageId;
+    private Language languageByOriginalLanguageId;
     private String title;
     private String description;
     private Date releaseYear;
@@ -18,12 +20,14 @@ public class FilmDto {
     private BigDecimal replacementCost;
     private String rating;
     private String specialFeatures;
-    private Timestamp lastUpdate;
+    private Date lastUpdate;
 
-    public FilmDto(Short filmId,  String title, String description,
+    public FilmDto(Short filmId, Language languageByLanguageId, Language languageByOriginalLanguageId, String title, String description,
                    Date releaseYear, byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost,
-                   String rating, String specialFeatures, Timestamp lastUpdate) {
+                   String rating, String specialFeatures, Date lastUpdate) {
         this.filmId = filmId;
+        this.languageByLanguageId = languageByLanguageId;
+        this.languageByOriginalLanguageId = languageByOriginalLanguageId;
         this.title = title;
         this.description = description;
         this.releaseYear = releaseYear;
@@ -47,7 +51,21 @@ public class FilmDto {
         this.filmId = filmId;
     }
 
+    public Language getLanguageByLanguageId() {
+        return languageByLanguageId;
+    }
 
+    public void setLanguageByLanguageId(Language languageByLanguageId) {
+        this.languageByLanguageId = languageByLanguageId;
+    }
+
+    public Language getLanguageByOriginalLanguageId() {
+        return languageByOriginalLanguageId;
+    }
+
+    public void setLanguageByOriginalLanguageId(Language languageByOriginalLanguageId) {
+        this.languageByOriginalLanguageId = languageByOriginalLanguageId;
+    }
 
     public String getTitle() {
         return title;
@@ -121,11 +139,11 @@ public class FilmDto {
         this.specialFeatures = specialFeatures;
     }
 
-    public Timestamp getLastUpdate() {
+    public Date getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -133,6 +151,8 @@ public class FilmDto {
     public String toString() {
         return "FilmDto{" +
                 "filmId=" + filmId +
+                ", languageByLanguageId=" + languageByLanguageId +
+                ", languageByOriginalLanguageId=" + languageByOriginalLanguageId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", releaseYear=" + releaseYear +

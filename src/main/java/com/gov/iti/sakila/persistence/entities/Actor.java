@@ -2,17 +2,13 @@ package com.gov.iti.sakila.persistence.entities;// default package
 // Generated Apr 7, 2023, 4:05:26 PM by Hibernate Tools 6.1.7.Final
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.*;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+
+
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -29,19 +25,21 @@ public class Actor  implements java.io.Serializable {
      private Short actorId;
      private String firstName;
      private String lastName;
-     private Timestamp lastUpdate;
+     private Date lastUpdate;
+
+
      private Set<FilmActor> filmActors = new HashSet<FilmActor>(0);
 
     public Actor() {
     }
 
 	
-    public Actor(String firstName, String lastName, Timestamp lastUpdate) {
+    public Actor(String firstName, String lastName, Date lastUpdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.lastUpdate = lastUpdate;
     }
-    public Actor(String firstName, String lastName, Timestamp lastUpdate, Set<FilmActor> filmActors) {
+    public Actor(String firstName, String lastName, Date lastUpdate, Set<FilmActor> filmActors) {
        this.firstName = firstName;
        this.lastName = lastName;
        this.lastUpdate = lastUpdate;
@@ -82,15 +80,15 @@ public class Actor  implements java.io.Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="last_update", nullable=false, length=19)
-    public Timestamp getLastUpdate() {
+    public Date getLastUpdate() {
         return this.lastUpdate;
     }
     
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.EAGER, mappedBy="actor")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="actor", cascade = CascadeType.ALL)
     public Set<FilmActor> getFilmActors() {
         return this.filmActors;
     }

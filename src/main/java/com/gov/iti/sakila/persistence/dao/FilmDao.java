@@ -3,6 +3,8 @@ package com.gov.iti.sakila.persistence.dao;
 import com.gov.iti.sakila.dto.FilmDto;
 import com.gov.iti.sakila.mappers.FilmMapper;
 
+import com.gov.iti.sakila.persistence.Database;
+import com.gov.iti.sakila.persistence.entities.Actor;
 import com.gov.iti.sakila.persistence.entities.Film;
 import org.mapstruct.factory.Mappers;
 
@@ -48,5 +50,12 @@ public class FilmDao extends GenericDao<Film> {
         return films.subList(start, endIndex).stream()
                 .map(filmMapper::filmToFilmDto)
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public void deleteById(int id) {
+        Optional<Film> filmOptional = getById(id);
+        filmOptional.ifPresent(film -> Database.doInTransactionWithoutResult(entityManager -> {
+            entityManager.remove(entityManager.contains(film) ? film : entityManager.merge(film));
+        }));
     }
 }
