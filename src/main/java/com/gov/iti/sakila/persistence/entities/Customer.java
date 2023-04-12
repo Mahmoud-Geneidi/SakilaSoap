@@ -77,7 +77,7 @@ public class Customer  implements java.io.Serializable {
         this.customerId = customerId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="store_id", nullable=false)
     public Store getStore() {
         return this.store;
@@ -87,7 +87,7 @@ public class Customer  implements java.io.Serializable {
         this.store = store;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="address_id", nullable=false)
     public Address getAddress() {
         return this.address;
@@ -157,7 +157,7 @@ public class Customer  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="customer")
     public Set<Payment> getPayments() {
         return this.payments;
     }
@@ -166,7 +166,7 @@ public class Customer  implements java.io.Serializable {
         this.payments = payments;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="customer")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="customer")
     public Set<Rental> getRentals() {
         return this.rentals;
     }

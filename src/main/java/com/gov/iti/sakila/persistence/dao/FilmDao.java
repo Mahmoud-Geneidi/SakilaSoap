@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class FilmDao extends GenericDao<Film> {
 
-    private FilmMapper filmMapper = Mappers.getMapper(FilmMapper.class);
+    public FilmMapper filmMapper = Mappers.getMapper(FilmMapper.class);
 
     public FilmDao() {
         super(Film.class);
@@ -34,8 +34,8 @@ public class FilmDao extends GenericDao<Film> {
         super.update(film);
     }
 
-    public void delete(Film film) {
-        super.delete(film);
+    public void delete(FilmDto film) {
+        super.delete(filmMapper.filmDtoToFilm(film));
     }
 
     public List<FilmDto> getAllFilms() {

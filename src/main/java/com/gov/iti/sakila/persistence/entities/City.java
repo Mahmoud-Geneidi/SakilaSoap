@@ -62,7 +62,7 @@ public class City  implements java.io.Serializable {
         this.cityId = cityId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="country_id", nullable=false)
     public Country getCountry() {
         return this.country;
@@ -92,7 +92,7 @@ public class City  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="city")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="city")
     public Set<Address> getAddresses() {
         return this.addresses;
     }

@@ -25,4 +25,19 @@ public class LanguageMapperImpl implements LanguageMapper {
 
         return languageDto;
     }
+
+    @Override
+      public Language languageDtoToLanguage(LanguageDto language) {
+        if ( language == null ) {
+            return null;
+        }
+
+        Language language1 = new Language();
+
+        language1.setLanguageId( language.getLanguageId() );
+        language1.setName( language.getName() );
+        language1.setLastUpdate( language.getLastUpdate() );
+
+        return language1;
+    }
 }

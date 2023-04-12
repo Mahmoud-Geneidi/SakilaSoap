@@ -17,6 +17,11 @@ public class LanguageDto implements Serializable {
     public LanguageDto() {
     }
 
+    public LanguageDto(String name, Date lastUpdate) {
+        this.name = name;
+        this.lastUpdate = lastUpdate;
+    }
+
     public Short getLanguageId() {
         return languageId;
     }

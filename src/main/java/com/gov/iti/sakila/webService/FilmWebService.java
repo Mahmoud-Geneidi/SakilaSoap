@@ -1,5 +1,6 @@
 package com.gov.iti.sakila.webService;
 
+import com.gov.iti.sakila.Services.FilmServices;
 import com.gov.iti.sakila.dto.ActorDto;
 import com.gov.iti.sakila.dto.FilmDto;
 import com.gov.iti.sakila.persistence.dao.FilmDao;
@@ -20,7 +21,7 @@ import java.util.Optional;
 @SOAPBinding(style = SOAPBinding.Style.RPC, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class FilmWebService {
 
-    private FilmDao filmDao = new FilmDao();
+    private FilmServices filmDao = new FilmServices();
 
     @WebMethod(operationName = "getFilmById")
     public FilmDto getFilmById(@WebParam(name = "id") int id) {
@@ -32,10 +33,7 @@ public class FilmWebService {
     public boolean saveFilm(@WebParam(name = "film") Film film) {
         if(film==null)
             return false;
-        LanguageDao languageDao = new LanguageDao();
-        Optional<Language> language = languageDao.getById(1);
-        Language language1 = language.orElse(null);
-        film.setLanguageByLanguageId(language1);
+
         filmDao.save(film);
         return true;
     }
@@ -46,7 +44,7 @@ public class FilmWebService {
     }
 
     @WebMethod(operationName = "deleteFilm")
-    public void deleteFilm(@WebParam(name = "film") Film film) {
+    public void deleteFilm(@WebParam(name = "film") FilmDto film) {
         filmDao.delete(film);
     }
 
@@ -64,8 +62,8 @@ public class FilmWebService {
     public boolean deleteFilmById(@WebParam(name = "id") int id) {
         Optional<FilmDto> optionalActorDto = filmDao.getFilmById(id);
         if (optionalActorDto.isPresent()) {
-            Film actor = filmDao.getById(id).get();
-            filmDao.delete(actor);
+            Optional<FilmDto> actor = filmDao.getFilmById(id);
+            filmDao.delete(actor.orElse(null));
             return true;
         }
         return false;

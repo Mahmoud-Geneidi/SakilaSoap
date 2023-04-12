@@ -77,7 +77,7 @@ public class Country  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="country")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="country")
     public Set<City> getCities() {
         return this.cities;
     }

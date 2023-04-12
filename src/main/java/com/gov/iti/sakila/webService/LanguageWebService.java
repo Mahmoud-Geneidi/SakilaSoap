@@ -1,6 +1,7 @@
 package com.gov.iti.sakila.webService;
 
 
+import com.gov.iti.sakila.Services.LanguageServices;
 import com.gov.iti.sakila.dto.LanguageDto;
 import com.gov.iti.sakila.persistence.dao.LanguageDao;
 
@@ -21,11 +22,11 @@ import java.util.Optional;
 @SOAPBinding(style = SOAPBinding.Style.RPC, use = SOAPBinding.Use.LITERAL, parameterStyle = SOAPBinding.ParameterStyle.WRAPPED)
 public class LanguageWebService {
 
-    private LanguageDao languageDao = new LanguageDao();
+    private LanguageServices languageServices = new LanguageServices();
 
     @WebMethod(operationName = "getLanguageById")
-    public LanguageDto getLanguageById(@WebParam(name = "id") int id) {
-        Optional<LanguageDto> optionalLanguageDto = languageDao.getLanguageById(id);
+    public LanguageDto getLanguageById(@WebParam(name = "id") short id) {
+        Optional<LanguageDto> optionalLanguageDto = languageServices.getLanguageById(id);
         return optionalLanguageDto.orElse(null); // Return the LanguageDto or null if it doesn't exist
     }
 
@@ -33,36 +34,35 @@ public class LanguageWebService {
     public boolean saveLanguage(@WebParam(name = "language") Language language) {
         if (language == null)
             return false;
-        languageDao.save(language);
+        languageServices.saveLanguage(language);
         return true;
     }
 
     @WebMethod(operationName = "updateLanguage")
-    public void updateLanguage(@WebParam(name = "language") Language language) {
-        languageDao.update(language);
+    public void updateLanguage(@WebParam(name = "language") LanguageDto language) {
+        languageServices.updateLanguage(language);
     }
 
     @WebMethod(operationName = "deleteLanguage")
-    public void deleteLanguage(@WebParam(name = "language") Language language) {
-        languageDao.delete(language);
+    public void deleteLanguage(@WebParam(name = "language") LanguageDto language) {
+        languageServices.deleteLanguage(language);
     }
 
     @WebMethod(operationName = "getAllLanguages")
     public LanguageList getAllLanguages() {
-        return new LanguageList((ArrayList<LanguageDto>) languageDao.getAllLanguages());
+        return new LanguageList((ArrayList<LanguageDto>) languageServices.getAllLanguages());
     }
 
     @WebMethod(operationName = "getAllLanguagesByLimit")
     public LanguageList getAllLanguagesByLimit(@WebParam(name = "start") int start, @WebParam(name = "limit") int limit) {
-        return new LanguageList((ArrayList<LanguageDto>) languageDao.getAllLanguagesByLimit(start, limit));
+        return new LanguageList((ArrayList<LanguageDto>) languageServices.getAllLanguagesByLimit(start, limit));
     }
 
     @WebMethod(operationName = "deleteLanguageById")
-    public boolean deleteLanguageById(@WebParam(name = "id") int id) {
-        Optional<LanguageDto> languageDto = languageDao.getLanguageById(id);
+    public boolean deleteLanguageById(@WebParam(name = "id") short id) {
+        Optional<LanguageDto> languageDto = languageServices.getLanguageById(id);
         if (languageDto.isPresent()) {
-            Language language = (Language) languageDao.getById(id).get();
-            languageDao.delete(language);
+            languageServices.deleteLanguage(languageDto.orElse(null));
             return true;
         }
         return false;

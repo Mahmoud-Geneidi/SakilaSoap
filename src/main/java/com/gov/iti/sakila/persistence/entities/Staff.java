@@ -84,7 +84,7 @@ public class Staff  implements java.io.Serializable {
         this.staffId = staffId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="store_id", nullable=false)
     public Store getStore() {
         return this.store;
@@ -94,7 +94,7 @@ public class Staff  implements java.io.Serializable {
         this.store = store;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="address_id", nullable=false)
     public Address getAddress() {
         return this.address;
@@ -184,7 +184,7 @@ public class Staff  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="staff")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="staff")
     public Set<Payment> getPayments() {
         return this.payments;
     }
@@ -193,7 +193,7 @@ public class Staff  implements java.io.Serializable {
         this.payments = payments;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="staff")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="staff")
     public Set<Store> getStores() {
         return this.stores;
     }
@@ -202,7 +202,7 @@ public class Staff  implements java.io.Serializable {
         this.stores = stores;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="staff")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="staff")
     public Set<Rental> getRentals() {
         return this.rentals;
     }

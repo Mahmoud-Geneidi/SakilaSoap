@@ -15,9 +15,11 @@ import java.util.stream.Collectors;
 public class ActorDao extends GenericDao<Actor> {
 
 
-    private ActorMapper actorMapper = Mappers.getMapper(ActorMapper.class);
+    public ActorMapper actorMapper = Mappers.getMapper(ActorMapper.class);
     public ActorDao() {
+
         super(Actor.class);
+
     }
 
 

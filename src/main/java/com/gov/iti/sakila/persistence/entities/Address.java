@@ -79,7 +79,7 @@ public class Address  implements java.io.Serializable {
         this.addressId = addressId;
     }
 
-@ManyToOne(fetch=FetchType.LAZY)
+@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="city_id", nullable=false)
     public City getCity() {
         return this.city;
@@ -159,7 +159,7 @@ public class Address  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="address")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="address")
     public Set<Staff> getStaffs() {
         return this.staffs;
     }
@@ -168,7 +168,7 @@ public class Address  implements java.io.Serializable {
         this.staffs = staffs;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="address")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="address")
     public Set<Customer> getCustomers() {
         return this.customers;
     }
@@ -177,7 +177,7 @@ public class Address  implements java.io.Serializable {
         this.customers = customers;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="address")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="address")
     public Set<Store> getStores() {
         return this.stores;
     }

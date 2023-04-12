@@ -77,7 +77,7 @@ public class Category  implements java.io.Serializable {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.LAZY, mappedBy="category")
+@OneToMany(fetch=FetchType.EAGER, mappedBy="category")
     public Set<FilmCategory> getFilmCategories() {
         return this.filmCategories;
     }

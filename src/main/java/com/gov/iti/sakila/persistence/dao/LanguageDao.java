@@ -34,17 +34,17 @@ public class LanguageDao extends GenericDao {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    @Override
-    public void save(Object entity) {
-        super.save(entity);
+
+    public void save(Language language) {
+        super.save(language);
     }
 
-    @Override
+
     public void update(Object entity) {
         super.update(entity);
     }
 
-    @Override
+
     public void delete(Object entity) {
         super.delete(entity);
     }

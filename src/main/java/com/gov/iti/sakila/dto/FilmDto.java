@@ -4,6 +4,7 @@ import com.gov.iti.sakila.persistence.entities.Language;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+
 import java.time.Year;
 import java.util.Date;
 
@@ -12,10 +13,10 @@ public class FilmDto implements Serializable {
 
     private Short filmId;
     private Language languageByLanguageId;
-    private Language languageByOriginalLanguageId;
+
     private String title;
     private String description;
-    private Year releaseYear;
+    private Integer releaseYear;
     private byte rentalDuration;
     private BigDecimal rentalRate;
     private Short length;
@@ -24,12 +25,10 @@ public class FilmDto implements Serializable {
     private String specialFeatures;
     private Date lastUpdate;
 
-    public FilmDto(Short filmId, Language languageByLanguageId, Language languageByOriginalLanguageId, String title, String description,
-                   Year releaseYear, byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost,
+    public FilmDto(Language languageID , String title, String description,
+                   Integer releaseYear, byte rentalDuration, BigDecimal rentalRate, Short length, BigDecimal replacementCost,
                    String rating, String specialFeatures, Date lastUpdate) {
-        this.filmId = filmId;
-        this.languageByLanguageId = languageByLanguageId;
-        this.languageByOriginalLanguageId = languageByOriginalLanguageId;
+        this.languageByLanguageId = languageID;
         this.title = title;
         this.description = description;
         this.releaseYear = releaseYear;
@@ -40,6 +39,14 @@ public class FilmDto implements Serializable {
         this.rating = rating;
         this.specialFeatures = specialFeatures;
         this.lastUpdate = lastUpdate;
+    }
+
+    public Language getLanguageByLanguageId() {
+        return languageByLanguageId;
+    }
+
+    public void setLanguageByLanguageId(Language languageByLanguageId) {
+        this.languageByLanguageId = languageByLanguageId;
     }
 
     public FilmDto() {
@@ -53,21 +60,7 @@ public class FilmDto implements Serializable {
         this.filmId = filmId;
     }
 
-    public Language getLanguageByLanguageId() {
-        return languageByLanguageId;
-    }
 
-    public void setLanguageByLanguageId(Language languageByLanguageId) {
-        this.languageByLanguageId = languageByLanguageId;
-    }
-
-    public Language getLanguageByOriginalLanguageId() {
-        return languageByOriginalLanguageId;
-    }
-
-    public void setLanguageByOriginalLanguageId(Language languageByOriginalLanguageId) {
-        this.languageByOriginalLanguageId = languageByOriginalLanguageId;
-    }
 
     public String getTitle() {
         return title;
@@ -85,11 +78,11 @@ public class FilmDto implements Serializable {
         this.description = description;
     }
 
-    public Year getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Year releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -153,8 +146,7 @@ public class FilmDto implements Serializable {
     public String toString() {
         return "FilmDto{" +
                 "filmId=" + filmId +
-                ", languageByLanguageId=" + languageByLanguageId +
-                ", languageByOriginalLanguageId=" + languageByOriginalLanguageId +
+                ", languageID= " + languageByLanguageId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", releaseYear=" + releaseYear +

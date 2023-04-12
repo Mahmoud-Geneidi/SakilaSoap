@@ -5,8 +5,14 @@
 
 package com.gov.iti.sakila.mappers;
 
+import com.gov.iti.sakila.Services.LanguageServices;
 import com.gov.iti.sakila.dto.FilmDto;
+import com.gov.iti.sakila.dto.LanguageDto;
 import com.gov.iti.sakila.persistence.entities.Film;
+import com.gov.iti.sakila.persistence.entities.Language;
+import org.mapstruct.factory.Mappers;
+
+import java.util.Optional;
 
 public class FilmMapperImpl implements FilmMapper {
 
@@ -29,5 +35,23 @@ public class FilmMapperImpl implements FilmMapper {
             filmDto.setLastUpdate(film.getLastUpdate());
             return filmDto;
         }
+    }
+
+    @Override
+    public Film filmDtoToFilm(FilmDto film) {
+        Film film1 = new Film();
+        film1.setFilmId(film.getFilmId());
+        film1.setTitle(film.getTitle());
+        film1.setDescription(film.getDescription());
+        film1.setReleaseYear(film.getReleaseYear());
+        film1.setRentalDuration(film.getRentalDuration());
+        film1.setRentalRate(film.getRentalRate());
+        film1.setLength(film.getLength());
+        film1.setReplacementCost(film.getReplacementCost());
+        film1.setRating(film.getRating());
+        film1.setSpecialFeatures(film.getSpecialFeatures());
+        film1.setLastUpdate(film.getLastUpdate());
+        film1.setLanguageByLanguageId(film.getLanguageByLanguageId());
+        return film1;
     }
 }

@@ -14,5 +14,9 @@ public interface LanguageMapper {
 
         LanguageDto languageToLanguageDto(Language language);
 
+    @Mapping(source = "languageId",target = "languageId")
+    @Mapping(source = "name",target = "name")
+    @Mapping(source = "lastUpdate",target = "lastUpdate")
+    Language languageDtoToLanguage(LanguageDto language);
 }
 
