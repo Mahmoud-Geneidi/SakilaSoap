@@ -12,7 +12,8 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import java.sql.Timestamp;
+
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -26,20 +27,20 @@ import java.util.Set;
 public class Category  implements java.io.Serializable {
 
 
-     private Byte categoryId;
+     private Short categoryId;
      private String name;
-     private Timestamp lastUpdate;
+     private Date lastUpdate;
      private Set<FilmCategory> filmCategories = new HashSet<FilmCategory>(0);
 
     public Category() {
     }
 
 	
-    public Category(String name, Timestamp lastUpdate) {
+    public Category(String name, Date lastUpdate) {
         this.name = name;
         this.lastUpdate = lastUpdate;
     }
-    public Category(String name, Timestamp lastUpdate, Set<FilmCategory> filmCategories) {
+    public Category(String name, Date lastUpdate, Set<FilmCategory> filmCategories) {
        this.name = name;
        this.lastUpdate = lastUpdate;
        this.filmCategories = filmCategories;
@@ -49,11 +50,11 @@ public class Category  implements java.io.Serializable {
 
     
     @Column(name="category_id", unique=true, nullable=false)
-    public Byte getCategoryId() {
+    public Short getCategoryId() {
         return this.categoryId;
     }
     
-    public void setCategoryId(Byte categoryId) {
+    public void setCategoryId(Short categoryId) {
         this.categoryId = categoryId;
     }
 
@@ -69,15 +70,15 @@ public class Category  implements java.io.Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="last_update", nullable=false, length=19)
-    public Timestamp getLastUpdate() {
+    public Date getLastUpdate() {
         return this.lastUpdate;
     }
     
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
-@OneToMany(fetch=FetchType.EAGER, mappedBy="category")
+@OneToMany(fetch=FetchType.LAZY, mappedBy="category")
     public Set<FilmCategory> getFilmCategories() {
         return this.filmCategories;
     }

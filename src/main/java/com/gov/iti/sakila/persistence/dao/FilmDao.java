@@ -4,7 +4,6 @@ import com.gov.iti.sakila.dto.FilmDto;
 import com.gov.iti.sakila.mappers.FilmMapper;
 
 import com.gov.iti.sakila.persistence.Database;
-import com.gov.iti.sakila.persistence.entities.Actor;
 import com.gov.iti.sakila.persistence.entities.Film;
 import org.mapstruct.factory.Mappers;
 

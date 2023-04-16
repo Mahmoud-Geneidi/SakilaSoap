@@ -9,4 +9,7 @@
 
     <endpoint name="LanguageWebService" implementation="com.gov.iti.sakila.webService.LanguageWebService"
               url-pattern="/language" />
+
+    <endpoint name="CategoryWebService" implementation="com.gov.iti.sakila.webService.CategoryWebService"
+              url-pattern="/category" />
 </endpoints>
