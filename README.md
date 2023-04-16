@@ -68,3 +68,19 @@ Update an existing language with the specified id.
 
 DELETE /languages/:id
 Delete a language with the specified id.
+
+### / Categories
+GET /categories
+Retrieve a list of all categories in the categories table.
+
+GET /categories/:id
+Retrieve a single category with the specified id.
+
+POST /categories
+Create a new category in the film table.
+
+PUT /categories/:id
+Update an existing category with the specified id.
+
+DELETE /categories/:id
+Delete a category with the specified id.
