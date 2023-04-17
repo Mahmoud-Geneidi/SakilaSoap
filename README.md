@@ -2,7 +2,7 @@
 
 
 # Sakila Web Services
-This project provides Soap web services for the Sakila schema. Services are for actor and film tables , can be used to retrieve, create, update, and delete data from the Sakila database.
+This project provides Soap web services for the Sakila schema. Services can be used to retrieve, create, update, and delete data from the Sakila database.
 
 ## API Documentation
 You can find the **API documentation** for this project here ("https://documenter.getpostman.com/view/26734747/2s93XsYRtE"). The documentation provides detailed information on how to use the web services and what parameters they accept.
