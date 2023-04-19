@@ -75,6 +75,7 @@
                                 <sei>com.gov.iti.sakila.webService.FilmWebService</sei>
                                 <sei>com.gov.iti.sakila.webService.LanguageWebService</sei>
                                 <sei>com.gov.iti.sakila.webService.CategoryWebService</sei>
+                                <sei>com.gov.iti.sakila.webService.CityWebService</sei>
                             </configuration>
                         </execution>
                     </executions>

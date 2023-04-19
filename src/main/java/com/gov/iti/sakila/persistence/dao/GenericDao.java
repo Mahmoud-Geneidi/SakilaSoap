@@ -22,6 +22,7 @@ public class GenericDao<T> {
     }
 
 
+
     public Optional<T> getById(int id) {
         EntityManager entityManager = null;
         try {

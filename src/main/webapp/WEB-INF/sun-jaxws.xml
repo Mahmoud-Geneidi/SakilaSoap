@@ -12,4 +12,7 @@
 
     <endpoint name="CategoryWebService" implementation="com.gov.iti.sakila.webService.CategoryWebService"
               url-pattern="/category" />
+
+    <endpoint name="CityWebService" implementation="com.gov.iti.sakila.webService.CityWebService"
+              url-pattern="/city" />
 </endpoints>

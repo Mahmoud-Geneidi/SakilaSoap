@@ -53,6 +53,17 @@
         <url-pattern>/category</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>CityWebService</servlet-name>
+        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>CityWebService</servlet-name>
+        <url-pattern>/city</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>actor</welcome-file>
     </welcome-file-list>

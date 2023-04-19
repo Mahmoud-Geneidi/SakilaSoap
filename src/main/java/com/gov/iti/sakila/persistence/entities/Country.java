@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -28,18 +29,18 @@ public class Country  implements java.io.Serializable {
 
      private Short countryId;
      private String country;
-     private Timestamp lastUpdate;
+     private Date lastUpdate;
      private Set<City> cities = new HashSet<City>(0);
 
     public Country() {
     }
 
 	
-    public Country(String country, Timestamp lastUpdate) {
+    public Country(String country, Date lastUpdate) {
         this.country = country;
         this.lastUpdate = lastUpdate;
     }
-    public Country(String country, Timestamp lastUpdate, Set<City> cities) {
+    public Country(String country, Date lastUpdate, Set<City> cities) {
        this.country = country;
        this.lastUpdate = lastUpdate;
        this.cities = cities;
@@ -69,11 +70,11 @@ public class Country  implements java.io.Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="last_update", nullable=false, length=19)
-    public Timestamp getLastUpdate() {
+    public Date getLastUpdate() {
         return this.lastUpdate;
     }
     
-    public void setLastUpdate(Timestamp lastUpdate) {
+    public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
