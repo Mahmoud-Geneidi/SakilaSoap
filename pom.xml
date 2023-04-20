@@ -76,6 +76,7 @@
                                 <sei>com.gov.iti.sakila.webService.LanguageWebService</sei>
                                 <sei>com.gov.iti.sakila.webService.CategoryWebService</sei>
                                 <sei>com.gov.iti.sakila.webService.CityWebService</sei>
+                                <sei>com.gov.iti.sakila.webService.PaymentWebService</sei>
                             </configuration>
                         </execution>
                     </executions>

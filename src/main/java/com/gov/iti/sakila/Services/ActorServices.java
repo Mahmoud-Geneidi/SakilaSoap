@@ -1,8 +1,10 @@
 package com.gov.iti.sakila.Services;
 
 import com.gov.iti.sakila.dto.ActorDto;
+import com.gov.iti.sakila.persistence.JPAUtil;
 import com.gov.iti.sakila.persistence.dao.ActorDao;
 import com.gov.iti.sakila.persistence.entities.Actor;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,12 +13,15 @@ public class ActorServices {
 
     private final ActorDao actorDao;
 
+    private EntityManager entityManager;
+
     public ActorServices() {
         this.actorDao = new ActorDao();
+        this.entityManager = JPAUtil.getEntityManager();
     }
 
     public Optional<ActorDto> getActorById(int id) {
-        return actorDao.getActorById(id);
+        return actorDao.getActorById(id,entityManager);
     }
 
     public void saveActor(Actor actor) {
@@ -40,6 +45,6 @@ public class ActorServices {
     }
 
     public void deleteActorById(int id) {
-        actorDao.deleteById(id);
+        actorDao.deleteById(id,entityManager);
     }
 }

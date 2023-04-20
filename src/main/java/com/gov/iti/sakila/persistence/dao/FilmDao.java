@@ -4,7 +4,9 @@ import com.gov.iti.sakila.dto.FilmDto;
 import com.gov.iti.sakila.mappers.FilmMapper;
 
 import com.gov.iti.sakila.persistence.Database;
+import com.gov.iti.sakila.persistence.JPAUtil;
 import com.gov.iti.sakila.persistence.entities.Film;
+import jakarta.persistence.EntityManager;
 import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
@@ -20,8 +22,8 @@ public class FilmDao extends GenericDao<Film> {
         super(Film.class);
     }
 
-    public Optional<FilmDto> getFilmById(int id) {
-        Optional<Film> filmOptional = super.getById(id);
+    public Optional<FilmDto> getFilmById(int id,EntityManager entityManager) {
+        Optional<Film> filmOptional = super.getById(id, entityManager);
         return filmOptional.map(filmMapper::filmToFilmDto);
     }
 
@@ -51,8 +53,8 @@ public class FilmDao extends GenericDao<Film> {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void deleteById(int id) {
-        Optional<Film> filmOptional = getById(id);
+    public void deleteById(int id, EntityManager em) {
+        Optional<Film> filmOptional = getById(id,em);
         filmOptional.ifPresent(film -> Database.doInTransactionWithoutResult(entityManager -> {
             entityManager.remove(entityManager.contains(film) ? film : entityManager.merge(film));
         }));

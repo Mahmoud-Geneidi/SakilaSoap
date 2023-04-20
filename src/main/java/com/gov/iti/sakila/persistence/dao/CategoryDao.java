@@ -3,7 +3,9 @@ package com.gov.iti.sakila.persistence.dao;
 import com.gov.iti.sakila.dto.CategoryDto;
 import com.gov.iti.sakila.mappers.CategoryMapper;
 import com.gov.iti.sakila.persistence.Database;
+import com.gov.iti.sakila.persistence.JPAUtil;
 import com.gov.iti.sakila.persistence.entities.Category;
+import jakarta.persistence.EntityManager;
 import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
@@ -23,8 +25,8 @@ public class CategoryDao extends GenericDao<Category> {
         super(Category.class);
     }
 
-    public Optional<CategoryDto> getCategoryById(int id) {
-        Optional<Category> categoryOptional = super.getById( id);
+    public Optional<CategoryDto> getCategoryById(int id,EntityManager entityManager) {
+        Optional<Category> categoryOptional = super.getById( id, entityManager);
         return categoryOptional.map(categoryMapper::categoryToCategoryDto);
     }
 
@@ -53,8 +55,8 @@ public class CategoryDao extends GenericDao<Category> {
         super.delete(categoryMapper.categoryDtoToCategory(category));
     }
 
-    public void deleteById(int id) {
-        Optional<Category> categoryOptional = getById(id);
+    public void deleteById(int id, EntityManager em) {
+        Optional<Category> categoryOptional = getById(id,em);
         categoryOptional.ifPresent(category -> Database.doInTransactionWithoutResult(entityManager -> {
             entityManager.remove(entityManager.contains(category) ? category : entityManager.merge(category));
         }));

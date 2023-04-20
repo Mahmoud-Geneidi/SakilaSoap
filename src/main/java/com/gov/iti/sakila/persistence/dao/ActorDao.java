@@ -4,7 +4,9 @@ import com.gov.iti.sakila.dto.ActorDto;
 import com.gov.iti.sakila.mappers.ActorMapper;
 
 import com.gov.iti.sakila.persistence.Database;
+import com.gov.iti.sakila.persistence.JPAUtil;
 import com.gov.iti.sakila.persistence.entities.Actor;
+import jakarta.persistence.EntityManager;
 import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
@@ -23,8 +25,8 @@ public class ActorDao extends GenericDao<Actor> {
     }
 
 
-    public Optional<ActorDto> getActorById(int id) {
-        Optional<Actor> actorOptional = super.getById(id);
+    public Optional<ActorDto> getActorById(int id , EntityManager entityManager) {
+        Optional<Actor> actorOptional = super.getById(id, entityManager);
         return actorOptional.map(actorMapper::actorToActorDto);
 
     }
@@ -55,8 +57,8 @@ public class ActorDao extends GenericDao<Actor> {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void deleteById(int id) {
-        Optional<Actor> actorOptional = getById(id);
+    public void deleteById(int id,EntityManager em) {
+        Optional<Actor> actorOptional = getById(id,em);
         actorOptional.ifPresent(actor -> Database.doInTransactionWithoutResult(entityManager -> {
             entityManager.remove(entityManager.contains(actor) ? actor : entityManager.merge(actor));
         }));

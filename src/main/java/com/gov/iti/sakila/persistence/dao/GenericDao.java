@@ -22,18 +22,11 @@ public class GenericDao<T> {
     }
 
 
+    public Optional<T> getById(int id, EntityManager entityManager) {
 
-    public Optional<T> getById(int id) {
-        EntityManager entityManager = null;
-        try {
-            entityManager = JPAUtil.getEntityManager();
-            T entity = entityManager.find(entityClass, id);
-            return Optional.ofNullable(entity);
-        } finally {
-            if (entityManager != null) {
-                entityManager.close();
-            }
-        }
+        T entity = entityManager.find(entityClass, id);
+        return Optional.ofNullable(entity);
+
     }
 
     public List<T> getAll() {

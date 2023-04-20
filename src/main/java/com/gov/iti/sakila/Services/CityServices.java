@@ -3,7 +3,9 @@ package com.gov.iti.sakila.Services;
 
 import com.gov.iti.sakila.dto.CityDto;
 
+import com.gov.iti.sakila.persistence.JPAUtil;
 import com.gov.iti.sakila.persistence.dao.CityDao;
+import jakarta.persistence.EntityManager;
 
 
 import java.util.List;
@@ -12,13 +14,16 @@ import java.util.Optional;
 public class CityServices {
 
     private final CityDao cityDao;
+    private EntityManager entityManager;
+
 
     public CityServices() {
         this.cityDao = new CityDao();
+        this.entityManager = JPAUtil.getEntityManager();
     }
 
     public Optional<CityDto> getCityById(Short id) {
-        return cityDao.getCityById(id);
+        return cityDao.getCityById(id,entityManager);
     }
 
     public void saveCity(CityDto cityDto) {
@@ -43,6 +48,6 @@ public class CityServices {
     }
 
     public void deleteCityById(Short id) {
-        cityDao.deleteById(id);
+        cityDao.deleteById(id,entityManager);
     }
 }

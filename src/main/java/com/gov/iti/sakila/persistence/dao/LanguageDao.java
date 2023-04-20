@@ -5,7 +5,9 @@ import com.gov.iti.sakila.dto.LanguageDto;
 import com.gov.iti.sakila.mappers.LanguageMapper;
 import com.gov.iti.sakila.persistence.Database;
 
+import com.gov.iti.sakila.persistence.JPAUtil;
 import com.gov.iti.sakila.persistence.entities.Language;
+import jakarta.persistence.EntityManager;
 import org.mapstruct.factory.Mappers;
 
 import java.util.ArrayList;
@@ -22,8 +24,8 @@ public class LanguageDao extends GenericDao {
     }
 
 
-    public Optional<LanguageDto> getLanguageById(int id) {
-        Optional<Language> languageOptional = super.getById(id);
+    public Optional<LanguageDto> getLanguageById(int id,EntityManager entityManager) {
+        Optional<Language> languageOptional = super.getById(id, entityManager);
         return languageOptional.map(languageMapper::languageToLanguageDto);
     }
 
@@ -57,8 +59,8 @@ public class LanguageDao extends GenericDao {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void deleteById(int id) {
-        Optional<Language> languageOptional = getById(id);
+    public void deleteById(int id, EntityManager em) {
+        Optional<Language> languageOptional = getById(id,em);
         languageOptional.ifPresent(language -> Database.doInTransactionWithoutResult(entityManager -> {
             entityManager.remove(entityManager.contains(language) ? language : entityManager.merge(language));
         }));

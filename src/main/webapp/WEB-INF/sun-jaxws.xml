@@ -15,4 +15,7 @@
 
     <endpoint name="CityWebService" implementation="com.gov.iti.sakila.webService.CityWebService"
               url-pattern="/city" />
+
+    <endpoint name="PaymentWebService" implementation="com.gov.iti.sakila.webService.PaymentWebService"
+              url-pattern="/payment" />
 </endpoints>

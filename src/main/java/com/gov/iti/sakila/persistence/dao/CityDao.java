@@ -7,6 +7,7 @@ import com.gov.iti.sakila.mappers.CityMapper;
 
 import com.gov.iti.sakila.persistence.Database;
 import com.gov.iti.sakila.persistence.JPAUtil;
+import com.gov.iti.sakila.persistence.entities.Category;
 import com.gov.iti.sakila.persistence.entities.City;
 import jakarta.persistence.EntityManager;
 
@@ -26,14 +27,9 @@ public class CityDao extends GenericDao<City> {
         super(City.class);
     }
 
-    public Optional<CityDto> getCityById(Short id) {
-        EntityManager entityManager = JPAUtil.getEntityManager();
-        entityManager.getTransaction().begin();
-        City city = entityManager.find(City.class, id);
-        entityManager.getTransaction().commit();
-        Optional<CityDto> optionalCityDto=Optional.ofNullable(cityMapper.cityToCityDto(city));
-        entityManager.close();
-        return optionalCityDto;
+    public Optional<CityDto> getCityById(Short id,EntityManager entityManager) {
+        Optional<City> cityOptional = super.getById( id, entityManager);
+        return cityOptional.map(cityMapper::cityToCityDto);
     }
 
     public void save(CityDto cityDto) {
@@ -63,8 +59,8 @@ public class CityDao extends GenericDao<City> {
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    public void deleteById(Short id) {
-        Optional<CityDto> cityOptional = getCityById(id);
+    public void deleteById(Short id,EntityManager em) {
+        Optional<CityDto> cityOptional = getCityById(id,em);
         System.out.println("-------------------------------"+cityOptional.orElse(null));
         cityOptional.ifPresent(city -> Database.doInTransactionWithoutResult(entityManager -> {
             entityManager.remove(entityManager.contains(cityMapper.cityDtoToCity(city)) ? cityMapper.cityDtoToCity(city) : entityManager.merge(cityMapper.cityDtoToCity(city)));
